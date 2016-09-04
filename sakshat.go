@@ -1,11 +1,11 @@
 package sakshat
 
 import (
+	"github.com/hanbang-wang/SAKS-SDK-GO/entities"
 	"github.com/stianeikeland/go-rpio"
 	"log"
 	"os"
 	"os/signal"
-	"github.com/hanbang-wang/SAKS-SDK-GO/entities"
 )
 
 var (
@@ -26,19 +26,19 @@ func SaksGpioInit() {
 	}
 
 	process := []rpio.Pin{IC_TM1637_DI, IC_TM1637_CLK, IC_74HC595_DS, IC_74HC595_SHCP, IC_74HC595_STCP}
-	for p := range (process) {
+	for p := range process {
 		process[p].Output()
 		process[p].Low()
 	}
 
 	process = []rpio.Pin{BUZZER, TACT_RIGHT, TACT_LEFT, DIP_SWITCH_1, DIP_SWITCH_2}
-	for p := range (process) {
+	for p := range process {
 		process[p].Output()
 		process[p].High()
 	}
 
 	process = []rpio.Pin{TACT_RIGHT, TACT_LEFT, DIP_SWITCH_1, DIP_SWITCH_2}
-	for p := range (process) {
+	for p := range process {
 		process[p].Input()
 		process[p].PullUp()
 	}
@@ -67,7 +67,7 @@ func init() {
 	Ds18b20 = entities.NewDS18B20(DS18B20)
 	DigitalDisplay = entities.NewDigitalDisplayTM1637(map[string]rpio.Pin{"di": IC_TM1637_DI, "clk": IC_TM1637_CLK}, rpio.High)
 	TactRow = entities.NewTactRow([]rpio.Pin{TACT_LEFT, TACT_RIGHT}, rpio.Low)
-	for _, t := range(TactRow.Tacts) {
+	for _, t := range TactRow.Tacts {
 		t.Register(OnTactEvent)
 	}
 	DipSwitch = entities.NewTactRow([]rpio.Pin{DIP_SWITCH_1, DIP_SWITCH_2}, rpio.Low)

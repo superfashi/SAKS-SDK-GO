@@ -1,13 +1,13 @@
 package sakshat
 
 import (
+	"strconv"
 	"testing"
 	"time"
-	"strconv"
 )
 
 func TestBuzzer(t *testing.T) {
-	Buzzer.BeepAction(time.Second / 5, time.Second / 5, 2)
+	Buzzer.BeepAction(time.Second/5, time.Second/5, 2)
 }
 
 func TestLEDRow(t *testing.T) {
@@ -40,7 +40,7 @@ func TestLEDRow(t *testing.T) {
 func TestDigitalDisplay(t *testing.T) {
 	// normal display test
 	cases := []string{"0000", "5678", "-999", "1.2.3.4.", "12.34"}
-	for i := range(cases) {
+	for i := range cases {
 		DigitalDisplay.Show(cases[i])
 		time.Sleep(time.Second)
 	}
